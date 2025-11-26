@@ -6,6 +6,8 @@
   Using <strong><%= @chat.model&.name || "Standard AI" %>
 </strong></p>
 
+<h2><%= @challenge.description %></h2>
+
 <% content_for :title, "Chat: #{@challenge.title}" %>
 
 <%= turbo_stream_from "chat_#{@chat.id}" %>

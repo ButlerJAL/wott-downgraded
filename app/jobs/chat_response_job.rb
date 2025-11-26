@@ -2,7 +2,7 @@ class ChatResponseJob < ApplicationJob
   def perform(chat_id, content)
     chat = Chat.find(chat_id)
 
-    chat.ask(content) do |chunk|
+   chat.ask(content) do |chunk|
       if chunk.content.present?
         message = chat.messages.last
         message.broadcast_append_chunk(chunk.content)
