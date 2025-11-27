@@ -3,10 +3,8 @@
   <h1>Challenges</h1>
 </div>
 <div class = "container d-flex justify-content-between mb-1">
-  <%= link_to "New challenge", new_challenge_path, class: "btn btn-primary rounded-pill p-2" %>
-  <h2><%= link_to "See all Chats", chats_path %></h2>
+  <%= link_to "New challenge", challenges_path, data: { turbo_method: :post }, class: "btn btn-primary rounded-pill p-2" %>
 </div>
-
 
 <div id="challenges" class = "container">
   <% @challenges.each do |challenge| %>

@@ -22,11 +22,25 @@ class ChallengesController < ApplicationController
 
   # POST /challenges or /challenges.json
   def create
-    @challenge = current_user.challenges.build(challenge_params)
+    # @challenge = current_user.challenges.build(challenge_params)
 
+    system_prompt = "
+      You are a master of Trivia and Enigma.
+      Your task is to create a challenge in the form of an Enigma.
+      Each challenge must include a title, the content of the challenge, and the secret answer.
+      If specific instructions are provided, follow them precisely while crafting the challenge.
+      Ensure the challenges are engaging, clear, and appropriately framed.
+      Avoid introducing unnecessary information or deviating from the task.
+      "
+    llm = RubyLLM.chat.with_temperature(1).with_instructions(system_prompt).with_schema(ChallengeSchema)
+    reponse = llm.ask("Generate")
+    # for Michael ("Generate based on #{params[:subject]}")
+
+    @challenge = Challenge.new(reponse.content)
+    @challenge.user = current_user
     respond_to do |format|
       if @challenge.save
-        format.html { redirect_to @challenge, notice: 'Challenge was successfully created.' }
+        format.html { redirect_to challenges_path, notice: 'Challenge was successfully created.' }
         format.json { render :show, status: :created, location: @challenge }
       else
         format.html { render :new, status: :unprocessable_content }
