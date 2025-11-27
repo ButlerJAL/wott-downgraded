@@ -4,6 +4,9 @@
 
   <div class="form-inputs">
     <%= f.input :title %>
+    <%= f.input :category, as: :select, collection: ['Classic', 'Word', 'Visual', 'Mystery / Story', 'Classic / Cultural ', 'Practical / Everyday'] %>
+    <%= f.input :temper, label: "Wizard's temper", as: :select, collection: ['Cocky', 'Passive aggressive', 'Angry', 'Sad', 'Melancholy', 'insulting'] %>
+    <%= f.input :difficulty, as: :select, collection: ['Beginner', 'Intermediate', 'Expert',] %>
     <%= f.input :description %>
   </div>
 
