@@ -7,8 +7,9 @@ class ChallengesController < ApplicationController
     @challenges = current_user.challenges
   end
 
-  # GET /challenges/1 or /challenges/1.json
+  # GET /challenges/1
   def show
+    redirect_to challenge_chat_path(@challenge)
   end
 
   # GET /challenges/new
@@ -20,41 +21,36 @@ class ChallengesController < ApplicationController
   def edit
   end
 
-  # POST /challenges or /challenges.json
+  # POST /challenges
   def create
     @challenge = current_user.challenges.build(challenge_params)
 
     respond_to do |format|
       if @challenge.save
-        format.html { redirect_to @challenge, notice: 'Challenge was successfully created.' }
-        format.json { render :show, status: :created, location: @challenge }
+        format.html { redirect_to challenges_path, notice: 'Enigma was successfully created.' }
       else
         format.html { render :new, status: :unprocessable_content }
-        format.json { render json: @challenge.errors, status: :unprocessable_content }
       end
     end
   end
 
-  # PATCH/PUT /challenges/1 or /challenges/1.json
+  # PATCH/PUT /challenges/1
   def update
     respond_to do |format|
       if @challenge.update(challenge_params)
-        format.html { redirect_to @challenge, notice: 'Challenge was successfully updated.', status: :see_other }
-        format.json { render :show, status: :ok, location: @challenge }
+        format.html { redirect_to challenges_path, notice: 'Enigma was successfully updated.', status: :see_other }
       else
         format.html { render :edit, status: :unprocessable_content }
-        format.json { render json: @challenge.errors, status: :unprocessable_content }
       end
     end
   end
 
-  # DELETE /challenges/1 or /challenges/1.json
+  # DELETE /challenges/1
   def destroy
     @challenge.destroy!
 
     respond_to do |format|
-      format.html { redirect_to challenges_path, notice: 'Challenge was successfully destroyed.', status: :see_other }
-      format.json { head :no_content }
+      format.html { redirect_to challenges_path, notice: 'Enigma was successfully destroyed.', status: :see_other }
     end
   end
 

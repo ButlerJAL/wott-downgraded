@@ -1,7 +1,10 @@
 class Message < ApplicationRecord
   acts_as_message tool_calls_foreign_key: :message_id
   has_many_attached :attachments
+
   broadcasts_to ->(message) { "chat_#{message.chat_id}" }
+
+  after_create_commit -> { broadcast_remove_to "chat_#{chat_id}", target: 'no_messages' }
 
   def broadcast_append_chunk(content)
     broadcast_append_to "chat_#{chat_id}",

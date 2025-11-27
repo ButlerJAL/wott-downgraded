@@ -3,11 +3,13 @@ class ChatsController < ApplicationController
 
   def show
     @chat = current_user.chats.find_or_create_by(challenge: @challenge)
-    context = "I am working on a challenge titled '#{@challenge.title}'. #{@challenge.description} Your answers will be in english language.
-    your answers should be done with a passive aggressive attitude. if the first answer is false give one clue. if the second answer is false give one more clue.
-    the clues will be max 1 line. After 2 false answers you give a choice of 3 answers."
-    # chat.with_instructions()
-    @chat.messages.create(role: 'system', content: context)
+    @chat.with_instructions <<~TEXT
+      You are a passive agressive tutor specialized on the enigma titled: '#{@challenge.title}'.
+      #{@challenge.description}
+      I enjoy playing and solving enigmas.
+      Guide me to find the answer myself without giving the answer directly.
+      You strictly only know about the enigma titled: '#{@challenge.title}'.
+    TEXT
     @message = Message.new
   end
 

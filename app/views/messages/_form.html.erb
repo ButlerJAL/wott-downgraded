@@ -10,9 +10,10 @@
     </div>
   <% end %>
   <div>
-    <%= form.text_field :content, style: "width: 100%; max-width: 600px;", placeholder: "Ask for help...", autofocus: true %>
+    <%= form.text_field :content, style: "width: 100%; max-width: 600px;", placeholder: "Ask AI for help...", autofocus: true %>
   </div>
-  <div>
-    <%= form.submit "Send message" %>
+  <div class="d-flex align-items-center gap-2 mt-3">
+    <%= form.submit "Send message", class: "btn btn-primary" %>
+    <%= link_to "Clear Chat", destroy_all_chat_messages_path(chat), class: "btn btn-danger", data: { turbo_method: :delete, turbo_confirm: "Are you sure? This will delete all messages." } %>
   </div>
 <% end %>

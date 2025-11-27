@@ -15,6 +15,11 @@ class MessagesController < ApplicationController
     end
   end
 
+  def destroy_all
+    @chat.messages.destroy_all
+    redirect_to challenge_chat_path(@chat.challenge), status: :see_other
+  end
+
   private
 
   def set_chat

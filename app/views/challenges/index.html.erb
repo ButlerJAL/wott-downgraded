@@ -1,27 +1,27 @@
-<div class="container pt-5">
+<div class="container py-5">
   <div class="row">
-    <p style="color: green"><%= notice %></p>
+    <h2 class="display-2 text-center fw-bold mb-4">My Enigmas</h2>
   </div>
 
-  <div class="row">
-    <h1 class="display-2 text-center fw-bold">Challenges</h1>
-  </div>
-
-  <div id="challenges" class="row row-cols-1 row-cols-md-4 g-4">
+  <div id="challenges" class="d-grid gap-4" style="grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));">
     <% @challenges.each do |challenge| %>
     <div class="col">
       <div class="card h-100">
         <div class="card-body">
           <%= render challenge %>
-          <p><%= link_to "Show this challenge", challenge, class: "card-link" %></p>
+        </div>
+        <div class="card-footer bg-transparent border-top-0">
+          <%= link_to "Solve with AI", challenge_chat_path(challenge), class: "btn btn-outline-primary w-100 mb-2" %>
+          <%= link_to "Edit", edit_challenge_path(challenge), class: "btn btn-outline-dark w-100 mb-2" %>
+          <%= link_to "Delete", challenge, class: "btn btn-outline-danger w-100", data: { turbo_method: :delete, turbo_confirm: "Are you sure? This will delete \"#{challenge.title}\" enigma." } %>
         </div>
       </div>
     </div>
     <% end %>
   </div>
 
-  <div class="mt-4">
-    <%= link_to "New challenge", new_challenge_path %>
-    <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "btn btn-danger" %>
+  <div class="container-fluid p-3 d-flex justify-content-between align-items-center">
+    <%= link_to content_tag(:i, "", class: "fa fa-plus") + " Add enigma", new_challenge_path, class: "btn btn-secondary" %>
+    <%= link_to content_tag(:i, "", class: "fa fa-trash"), user_registration_path(current_user), class: "btn btn-danger", data: { turbo_method: :delete, turbo_confirm: "Are you sure? This will permanently delete your account." } %>
   </div>
 </div>
