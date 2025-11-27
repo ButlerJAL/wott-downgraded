@@ -21,8 +21,8 @@ class ChallengesController < ApplicationController
   def edit
   end
 
-  # POST /challenges
-  def create
+
+  def create_with_ai
     # @challenge = current_user.challenges.build(challenge_params)
 
     system_prompt = "
@@ -39,6 +39,18 @@ class ChallengesController < ApplicationController
 
     @challenge = Challenge.new(reponse.content)
     @challenge.user = current_user
+    respond_to do |format|
+      if @challenge.save
+        format.html { redirect_to challenges_path, notice: 'Enigma was successfully created.' }
+      else
+        format.html { render :new, status: :unprocessable_content }
+      end
+    end
+  end
+
+  # POST /challenges
+  def create
+    @challenge = current_user.challenges.build(challenge_params)
     respond_to do |format|
       if @challenge.save
         format.html { redirect_to challenges_path, notice: 'Enigma was successfully created.' }

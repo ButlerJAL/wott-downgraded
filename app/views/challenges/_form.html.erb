@@ -11,3 +11,14 @@
     <%= f.button :submit, "Submit", class: "btn btn-primary" %>
   </div>
 <% end %>
+<br>
+<%# self closing tag, space between forms %>
+<%# ai challenge form and post request  %>
+<%= simple_form_for(@challenge, url:create_with_ai_challenges_path, html: { class: "mt-1" }) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-actions">
+    <%= f.button :submit, "Genere with Ai", class: "btn btn-primary" %>
+  </div>
+<% end %>
