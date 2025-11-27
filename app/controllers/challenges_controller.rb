@@ -26,9 +26,10 @@ class ChallengesController < ApplicationController
 
   def create_with_ai
     system_prompt = "
-      You are a master of Trivia and Enigma.
-      Your task is to create an Enigma.
-      Each Enigma must include a title and the content of the Enigma.
+      You are a the game master for our Enigma game.
+      Your task is to create an Enigma for a user to guess.
+      Each Enigma must include a title and the description should include the content of the Enigma with a category of #{params[:category]} and difficulty of #{params[:difficulty]}.
+      The title should not contain the answer.
       If specific instructions are provided, follow them precisely while crafting the Enigma.
       Ensure the Enigma is clear and appropriately framed.
       Avoid introducing unnecessary information or deviating from the task.
@@ -40,9 +41,6 @@ class ChallengesController < ApplicationController
     # Debug: Check what type response.content is
     # Rails.logger.info "Response class: #{response.content.class}"
     # Rails.logger.info "Response content: #{response.content.inspect}"
-
-    llm = RubyLLM.chat.with_temperature(1).with_instructions(system_prompt).with_schema(ChallengeSchema)
-    response = llm.ask("Generate an enigma challenge")
 
     respond_to do |format|
       format.json do

@@ -1,32 +1,46 @@
-<%= simple_form_for(@challenge) do |f| %>
-  <%= f.error_notification %>
-  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+<div data-controller="generate-enigma">
+  <%= simple_form_for(@challenge) do |f| %>
+    <%= f.error_notification %>
+    <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-  <div class="form-inputs">
+    <div class="form-inputs">
 
-    <%= f.input :title, input_html: { id: 'challenge_title'} %>
-    <%= f.input :category, as: :select, collection: ['Classic', 'Word', 'Visual', 'Mystery / Story', 'Classic / Cultural ', 'Practical / Everyday'] %>
-    <%= f.input :temper, label: "Wizard's temper", as: :select, collection: ['Cocky', 'Passive aggressive', 'Angry', 'Sad', 'Melancholy', 'insulting'] %>
-    <%= f.input :difficulty, as: :select, collection: ['Beginner', 'Intermediate', 'Expert',] %>
-    <%= f.input :description, input_html: {id: 'challenge_description'}  %>
+      <%= f.input :title,
+                  input_html: {data: { generate_enigma_target: "title" }}  %>
+      <%= f.input :category,
+                  input_html: {data: { generate_enigma_target: "category" }},
+                  as: :select,
+                  collection: ['Classic', 'Egypt', 'Roman Empire', 'Mystery / Story', 'Classic / Cultural ', 'Practical / Everyday'] %>
+      <%= f.input :temper,
+                  label: "Wizard's temper",
+                  as: :select,
+                  collection: ['Cocky', 'Passive aggressive', 'Angry', 'Sad', 'Melancholy', 'Insulting'] %>
+      <%= f.input :difficulty,
+                  input_html: {data: { generate_enigma_target: "difficulty" }},
+                  as: :select,
+                  collection: ['Beginner', 'Intermediate', 'Expert',] %>
+      <%= f.input :description,
+                  input_html: {data: { generate_enigma_target: "description" }}  %>
 
-  </div>
+    </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Submit", class: "btn btn-primary" %>
-  </div>
-<% end %>
+    <div class="form-actions">
+      <%= f.button :submit, "Submit", class: "btn btn-primary" %>
+    </div>
+  <% end %>
 
-<br>
+  <br>
 
-<%# Generate with AI button%>
+  <%# Generate with AI button%>
 
-<button type = "button"
-        id="generate-with-ai-btn"
-        class="btn btn-primary w-auto"
-        data-url="<%= create_with_ai_challenges_path %>">
-        Generate with AI
-        </button>
-<span id="ai-loading" class="d-none ms-2">
-  <span class="spinner-border spinner-border-sm"></span> Generating...
-</span>
+  <button type = "button"
+          data-action="click->generate-enigma#generate"
+          data-generate-enigma-target="generate"
+          class="btn btn-primary w-auto"
+          data-url="<%= create_with_ai_challenges_path %>">
+          Generate with AI
+          </button>
+  <span data-generate-enigma-target="loading" class="d-none ms-2">
+    <span class="spinner-border spinner-border-sm"></span> Generating...
+  </span>
+</div>
