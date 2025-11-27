@@ -1,2 +1,2 @@
 # wott-downgraded
-Wott Downgraded is an AI-assistant
+WOTTe is an AI-assistant

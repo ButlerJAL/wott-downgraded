@@ -79,5 +79,3 @@ group :test do
 end
 
 gem 'ruby_llm', '~> 1.9'
-
-gem 'pgvector', '~> 0.3.2'
