@@ -1,18 +1,21 @@
 Rails.application.routes.draw do
   resources :challenges do
     resource :chat, only: %i[show create]
-    get :refresh
-  end
-  resources :models, only: %i[index show] do
-    collection do
-      post :refresh #to refresh partial and not the whole page
-    end
   end
   resources :chats, only: [] do
-    resources :messages, only: [:create]
+    resources :messages, only: [:create] do
+      collection do
+        delete :destroy_all
+      end
+    end
   end
   devise_for :users
-  root to: 'pages#home'
+  authenticated :user do
+    root to: 'challenges#index', as: :authenticated_root
+  end
+  devise_scope :user do
+    root to: 'devise/sessions#new', as: :unauthenticated_root
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

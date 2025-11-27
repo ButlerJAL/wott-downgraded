@@ -1,21 +1,27 @@
-<p style="color: green"><%= notice %></p>
-<div class = "container">
-  <h1>Challenges</h1>
-</div>
-<div class = "container d-flex justify-content-between mb-1">
-  <%= link_to "New challenge", challenges_path, data: { turbo_method: :post }, class: "btn btn-primary rounded-pill p-2" %>
-</div>
+<div class="container py-5">
+  <div class="row">
+    <h2 class="display-2 text-center fw-bold mb-4">My Enigmas</h2>
+  </div>
 
-<div id="challenges" class = "container">
-  <% @challenges.each do |challenge| %>
-    <div class="card mb-2 p-2">
-    <%= render challenge %>
-    <p>
-      <%= link_to "Show this challenge", challenge %>
-    </p>
-    <p>
-      <%= link_to "Chat History", challenge_chat_path(challenge) %>
-    </p>
+  <div id="challenges" class="d-grid gap-4" style="grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));">
+    <% @challenges.each do |challenge| %>
+    <div class="col">
+      <div class="card h-100">
+        <div class="card-body">
+          <%= render challenge %>
+        </div>
+        <div class="card-footer bg-transparent border-top-0">
+          <%= link_to "Solve with AI", challenge_chat_path(challenge), class: "btn btn-outline-primary w-100 mb-2" %>
+          <%= link_to "Edit", edit_challenge_path(challenge), class: "btn btn-outline-dark w-100 mb-2" %>
+          <%= link_to "Delete", challenge, class: "btn btn-outline-danger w-100", data: { turbo_method: :delete, turbo_confirm: "Are you sure? This will delete \"#{challenge.title}\" enigma." } %>
+        </div>
+      </div>
     </div>
-  <% end %>
+    <% end %>
+  </div>
+
+  <div class="container-fluid p-3 d-flex justify-content-between align-items-center">
+    <%= link_to content_tag(:i, "", class: "fa fa-plus") + " Add enigma", new_challenge_path, class: "btn btn-secondary" %>
+    <%= link_to content_tag(:i, "", class: "fa fa-trash"), user_registration_path(current_user), class: "btn btn-danger", data: { turbo_method: :delete, turbo_confirm: "Are you sure? This will permanently delete your account." } %>
+  </div>
 </div>

@@ -1,11 +1,6 @@
-<div id="<%= dom_id challenge %>">
-  <p>
-    <strong>Title:</strong>
-    <%= challenge.title %>
-  </p>
-
-  <p>
-    <strong>Description:</strong>
-    <%= challenge.description %>
-  </p>
+<div class="col">
+  <div id="<%= dom_id challenge %>">
+    <h5 class="card-title fw-bold mb-4"><%= challenge.title %></h5>
+    <p class="card-text"><%= challenge.description %></p>
+  </div>
 </div>

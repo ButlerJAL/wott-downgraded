@@ -1,29 +1,26 @@
-<p style="color: green"><%= notice %></p>
+<div class="container justify-content-center pt-5">
+  <div class="row">
+    <h2 class="display-6 text-center fw-bold"><%= @challenge.title %></h2>
+    <p>Using <strong><%= @chat.model&.name || "Standard AI" %></strong></p>
+    <p class="mb-5"><%= @challenge.description %></p>
 
-<h1>Assistant for: <%= @challenge.title %></h1>
+    <% content_for :title, "Chat: #{@challenge.title}" %>
+    <%= turbo_stream_from "chat_#{@chat.id}" %>
 
-<p>
-  Using <strong><%= @chat.model&.name || "Standard AI" %>
-</strong></p>
+    <% visible_messages = @chat.messages.where(role: ["user", "assistant"]).where.not(id: nil) %>
 
-<% content_for :title, "Chat: #{@challenge.title}" %>
+    <div id="messages">
+    <% if visible_messages.empty? %>
+      <p id="no_messages" class="text-muted">No messages yet. Ask a question or guess the answer to get started on the solution!</p>
+    <% else %>
+      <% visible_messages.each do |message| %>
+        <%= render message %>
+      <% end %>
+    <% end %>
+    </div>
 
-<%= turbo_stream_from "chat_#{@chat.id}" %>
-
-<div id="messages">
-  <% @chat.messages.where(role: ["user", "assistant"]).where.not(id: nil).each do |message| %>
-    <%= render message %>
-  <% end %>
-</div>
-
-<% if @chat.messages.none? { |m| m.persisted? } %>
-    <p class="text-muted">No messages yet. Ask a question to get started!</p>
-<% end %>
-
-<div style="margin-top: 30px;">
-  <%= render "messages/form", chat: @chat, message: @message %>
-</div>
-
-<div style="margin-top: 20px;">
-  <%= link_to "Back to challenge", challenge_path(@challenge), class: "btn btn-secondary" %>
+    <div style="margin-top: 30px;">
+      <%= render "messages/form", chat: @chat, message: @message %>
+    </div>
+  </div>
 </div>

@@ -17,16 +17,17 @@ class CreateModels < ActiveRecord::Migration[7.1]
 
       t.timestamps
 
-      t.index %i[provider model_id], unique: true
+      t.index [:provider, :model_id], unique: true
       t.index :provider
       t.index :family
 
       t.index :capabilities, using: :gin
       t.index :modalities, using: :gin
+
     end
 
     # Load models from JSON
-    say_with_time 'Loading models from models.json' do
+    say_with_time "Loading models from models.json" do
       RubyLLM.models.load_from_json!
       Model.save_to_database
     end
