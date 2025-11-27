@@ -3,22 +3,25 @@
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <div class="form-inputs">
-    <%= f.input :title %>
-    <%= f.input :description %>
+    <%= f.input :title, input_html: { id: 'challenge_title'} %>
+    <%= f.input :description, input_html: {id: 'challenge_description'} %>
   </div>
 
   <div class="form-actions">
     <%= f.button :submit, "Submit", class: "btn btn-primary" %>
   </div>
 <% end %>
-<br>
-<%# self closing tag, space between forms %>
-<%# ai challenge form and post request  %>
-<%= simple_form_for(@challenge, url:create_with_ai_challenges_path, html: { class: "mt-1" }) do |f| %>
-  <%= f.error_notification %>
-  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Genere with Ai", class: "btn btn-primary" %>
-  </div>
-<% end %>
+<br>
+
+<%# Generate with AI button%>
+
+<button type = "button"
+        id="generate-with-ai-btn"
+        class="btn btn-primary w-auto"
+        data-url="<%= create_with_ai_challenges_path %>">
+        Generate with AI
+        </button>
+<span id="ai-loading" class="d-none ms-2">
+  <span class="spinner-border spinner-border-sm"></span> Generating...
+</span>
