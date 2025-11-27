@@ -11,7 +11,7 @@
 
     <div id="messages">
     <% if visible_messages.empty? %>
-      <p class="text-muted">No messages yet. Ask a question or guess the answer to get started on the solution!</p>
+      <p id="no_messages" class="text-muted">No messages yet. Ask a question or guess the answer to get started on the solution!</p>
     <% else %>
       <% visible_messages.each do |message| %>
         <%= render message %>
