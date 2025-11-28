@@ -94,6 +94,6 @@ class ChallengesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def challenge_params
-    params.require(:challenge).permit(:title, :description, :category, :temper, :difficulty)
+    params.require(:challenge).permit(:title, :description)
   end
 end
