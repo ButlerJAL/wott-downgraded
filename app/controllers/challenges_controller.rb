@@ -26,7 +26,7 @@ class ChallengesController < ApplicationController
 
   def create_with_ai
     system_prompt = "
-      You are a the game master for our Enigma game.
+      You are the Game Master for our Enigma game.
       Your task is to create an Enigma for a user to guess.
       Each Enigma must include a title and the description should include the content of the Enigma with a category of #{params[:category]} and difficulty of #{params[:difficulty]}.
       The title should not contain the answer.

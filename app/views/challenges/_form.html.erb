@@ -3,10 +3,9 @@
     <%= f.error_notification %>
     <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-    <div class="form-inputs">
-
+    <div class="form-inputs forms">
       <%= f.input :title,
-                  input_html: {data: { generate_enigma_target: "title" }}  %>
+                  input_html: {data: { generate_enigma_target: "title" }}%>
       <%= f.input :category,
                   input_html: {data: { generate_enigma_target: "category" }},
                   as: :select,
@@ -21,11 +20,10 @@
                   collection: ['Beginner', 'Intermediate', 'Expert',] %>
       <%= f.input :description,
                   input_html: {data: { generate_enigma_target: "description" }}  %>
-
     </div>
 
     <div class="form-actions">
-      <%= f.button :submit, "Submit", class: "btn btn-primary" %>
+      <%= f.button :submit, "Submit", class: "btn btn-outline-gray" %>
     </div>
   <% end %>
 
@@ -36,7 +34,8 @@
   <button type = "button"
           data-action="click->generate-enigma#generate"
           data-generate-enigma-target="generate"
-          class="btn btn-primary w-auto"
+          class="btn btn btn-outline-gray "
+          id="generate-btn"
           data-url="<%= create_with_ai_challenges_path %>">
           Generate with AI
           </button>

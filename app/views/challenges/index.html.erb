@@ -1,6 +1,6 @@
 <div class="container py-5">
   <div class="row">
-    <h2 id="main-title" class="display-2 text-center fw-bold mb-4">My Enigmas</h2>
+    <h2 id="main-title" class="display-2 text-center fw-bold mb-4">The Cocky Wizard</h2>
     <div class="container d-flex mb-4">
       <div class="h-25 mb-auto mt-auto" id="wizard-speaking">
         <p>Welcome to my domain, mere mortal. Behold the one, the only... <strong>Cocky Wizard</strong>, Grandmaster of Enigmas!</p>
@@ -19,8 +19,8 @@
           <%= render challenge %>
         </div>
         <div class="card-footer bg-transparent border-top-0">
-          <%= link_to "Solve with AI", challenge_chat_path(challenge), class: "btn btn-outline-primary w-100 mb-2" %>
-          <%= link_to "Edit", edit_challenge_path(challenge), class: "btn btn-outline-gray w-100 mb-2" %>
+          <%= link_to "Solve with the Cocky Wizard", challenge_chat_path(challenge), class: "btn btn-outline-blue w-100 mb-2" %>
+          <%= link_to "Edit", edit_challenge_path(challenge), class: "btn btn-gray w-100 mb-2" %>
           <%= link_to "Delete", challenge, class: "btn btn-outline-danger w-100", data: { turbo_method: :delete, turbo_confirm: "Are you sure? This will delete \"#{challenge.title}\" enigma." } %>
         </div>
       </div>
