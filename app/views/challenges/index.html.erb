@@ -1,7 +1,15 @@
 <div class="container py-5">
   <div class="row">
-    <h2 class="display-2 text-center fw-bold mb-4">My Enigmas</h2>
+    <h2 id="main-title" class="display-2 text-center fw-bold mb-4">My Enigmas</h2>
+    <div class="container d-flex mb-4">
+      <div class="h-25 mb-auto mt-auto" id="wizard-speaking">
+        <p>Welcome to my domain, mere mortal. Behold the one, the only... <strong>Cocky Wizard</strong>, Grandmaster of Enigmas!</p>
+        <p>Dare to test your wits against my brilliance? I shall be your guide through these trials, but be warned: I offer no mercy to the dim-witted.</p>
+      </div>
+      <img src="https://res.cloudinary.com/dbujq6iym/image/upload/v1764295761/Gemini_Generated_Image_83i7vq83i7vq83i7-2-removebg-preview_ifurto.png" class="w-auto"  />
+    </div>
   </div>
+
 
   <div id="challenges" class="d-grid gap-4" style="grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));">
     <% @challenges.each do |challenge| %>
@@ -12,7 +20,7 @@
         </div>
         <div class="card-footer bg-transparent border-top-0">
           <%= link_to "Solve with AI", challenge_chat_path(challenge), class: "btn btn-outline-primary w-100 mb-2" %>
-          <%= link_to "Edit", edit_challenge_path(challenge), class: "btn btn-outline-dark w-100 mb-2" %>
+          <%= link_to "Edit", edit_challenge_path(challenge), class: "btn btn-outline-gray w-100 mb-2" %>
           <%= link_to "Delete", challenge, class: "btn btn-outline-danger w-100", data: { turbo_method: :delete, turbo_confirm: "Are you sure? This will delete \"#{challenge.title}\" enigma." } %>
         </div>
       </div>
@@ -21,7 +29,7 @@
   </div>
 
   <div class="container-fluid p-3 d-flex justify-content-between align-items-center">
-    <%= link_to content_tag(:i, "", class: "fa fa-plus") + " Add enigma", new_challenge_path, class: "btn btn-secondary" %>
+    <%= link_to content_tag(:i, "", class: "fa fa-plus") + " Add enigma", new_challenge_path, class: "btn btn-gray" %>
     <%= link_to content_tag(:i, "", class: "fa fa-trash"), user_registration_path(current_user), class: "btn btn-danger", data: { turbo_method: :delete, turbo_confirm: "Are you sure? This will permanently delete your account." } %>
   </div>
 </div>

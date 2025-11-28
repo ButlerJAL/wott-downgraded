@@ -1,13 +1,13 @@
 <nav class="navbar navbar-expand-sm navbar-light navbar-lewagon">
   <% if user_signed_in? %>
-  <div class="container-fluid p-3">
-    <%= link_to content_tag(:i, "", class: "fa fa-home") + " My Enigmas", challenges_path, class: "text-decoration-none" %>
-    <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" class="avatar-square" />
-    <%= link_to content_tag(:i, "", class: "fa fa-sign-out")+ " Sign Out", destroy_user_session_path, data: {turbo_method: :delete}, class: "text-decoration-none" %>
+  <div class="container-fluid p-5 pb-0 pt-1">
+    <%= link_to content_tag(:i, "", class: "fa fa-home") + " My Enigmas", challenges_path, id: "navbar-my-enigma" %>
+    <img src="https://res.cloudinary.com/dbujq6iym/image/upload/v1764295761/Gemini_Generated_Image_83i7vq83i7vq83i7-2-removebg-preview_ifurto.png" class="avatar-square" />
+    <%= link_to content_tag(:i, "", class: "fa fa-sign-out")+ " Sign Out", destroy_user_session_path, data: {turbo_method: :delete}, id: "navbar-signout" %>
   </div>
   <% else %>
     <div class="container-fluid justify-content-center p-3">
-      <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" class="avatar-square" />
+      <img src="https://res.cloudinary.com/dbujq6iym/image/upload/v1764294355/image_u0zcra.webp" class="avatar-square" />
     </div>
   <% end %>
 </nav>
