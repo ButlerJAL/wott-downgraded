@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   resources :challenges do
     resource :chat, only: %i[show create]
+    collection do # so that it doesn't create id
+      get :create_with_ai # ai created challenge
+    end
   end
   resources :chats, only: [] do
     resources :messages, only: [:create] do
