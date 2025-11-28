@@ -1,15 +1,14 @@
-<div class="container justify-content-center pt-5">
+<div class="card container justify-content-center mb-5 mt-5 p-4">
   <div class="row">
     <h2 class="display-6 text-center fw-bold"><%= @challenge.title %></h2>
-    <p>Using <strong><%= @chat.model&.name || "Standard AI" %></strong></p>
-    <p class="mb-5"><%= @challenge.description %></p>
+    <h3 class="mb-5"><%= @challenge.description %></h3>
 
     <% content_for :title, "Chat: #{@challenge.title}" %>
     <%= turbo_stream_from "chat_#{@chat.id}" %>
 
     <% visible_messages = @chat.messages.where(role: ["user", "assistant"]).where.not(id: nil) %>
 
-    <div id="messages">
+    <div id="messages" >
     <% if visible_messages.empty? %>
       <p id="no_messages" class="text-muted">No messages yet. Ask a question or guess the answer to get started on the solution!</p>
     <% else %>

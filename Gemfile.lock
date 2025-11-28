@@ -437,6 +437,7 @@ DEPENDENCIES
   rubocop-capybara
   rubocop-rails
   ruby_llm (~> 1.9)
+  ruby_llm-schema
   sassc-rails
   selenium-webdriver
   simple_form!

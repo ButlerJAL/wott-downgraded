@@ -1,12 +1,12 @@
 <div class="container justify-content-center pt-5">
   <div class="row text-center">
-    <h1 class="display-1 fw-bold">WOTTe</h1>
+    <h1 class="display-1 fw-bold" id="main-title">The Cocky Wizard</h1>
     <p class="lead text-muted">The AI-powered enigma assistant</p>
   </div>
   <div class="row">
-    <h2>Log in</h2>
+    <h2 style="color: #01ddff;">Log in</h2>
     <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-      <div class="form-inputs">
+      <div class="form-inputs forms">
         <%= f.input :email,
                     required: false,
                     autofocus: true,
@@ -18,7 +18,7 @@
       </div>
 
       <div class="form-actions">
-        <%= f.button :submit, "Log in", class: "btn btn-primary mb-4" %>
+        <%= f.button :submit, "Log in", class: "btn mb-4", id: "login-btn" %>
       </div>
     <% end %>
 
