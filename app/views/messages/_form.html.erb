@@ -18,6 +18,6 @@
   </div>
   <div class="d-flex align-items-center gap-2 mt-3">
     <%= form.submit "Send message", class: "btn btn-outline-gray" %>
-    <%= link_to "Clear Chat", destroy_all_chat_messages_path(chat), class: "btn btn-danger", data: { turbo_method: :delete, turbo_confirm: "Are you sure? This will delete all messages." } %>
+    <%= link_to "Clear Chat", destroy_all_chat_messages_path(chat), class: "btn btn-outline-blue ", data: { turbo_method: :delete, turbo_confirm: "Are you sure? This will delete all messages." } %>
   </div>
 <% end %>

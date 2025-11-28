@@ -25,7 +25,7 @@ body {
 .card {
   border-width: 2px;
   border-color: rgba($color: #ea00ff, $alpha: 0.7);
-  background-color: rgba($color: #160025, $alpha: 0.0);
+  background-color: rgba($color: transparent, $alpha: 0.0);
   color: rgba($color: #01ddff, $alpha: 1.0);
   box-shadow: 0px 0px 10px 2px #ea00ff;
 }
@@ -80,8 +80,8 @@ body {
 
 .forms {
   input[type="text"],
-  // input[type="email"],
-  // input[type="password"],
+  input[type="email"],
+  input[type="password"],
   textarea,
   select {
     background-color: transparent !important;
@@ -100,6 +100,17 @@ body {
     &::placeholder {
       color: #01ddff;
       opacity: 0.7;
+    }
+
+    // Autofill
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus,
+    &:-webkit-autofill:active {
+      -webkit-box-shadow: 0 0 0 1000px transparent inset !important;
+      -webkit-text-fill-color: #01ddff !important;
+      border: 2px solid #ea00ff !important;
+      transition: background-color 5000s ease-in-out 0s;
     }
   }
 
@@ -138,5 +149,28 @@ body {
     color: #ea00ff;
     border: 2px solid #ea00ff;
     box-shadow: 0px 0px 10px 1px #ea00ff;
+  }
+}
+
+.btn-edit {
+  border: 1px solid #01ddff;
+  color: #01ddff;
+
+  &:hover {
+    background-color: transparent;
+    color: #01ddff;
+    border: 2px solid #01ddff;
+    box-shadow: 0px 0px 10px 1px #01ddff;
+  }
+}
+
+#login-btn {
+  border: 2px solid #ea00ff;
+  box-shadow: 0px 0px 10px 3px #ea00ff;
+  &:hover {
+    background-color: transparent;
+    color: #01ddff;
+    border: 2px solid #01ddff;
+    box-shadow: 0px 0px 10px 1px #01ddff;
   }
 }

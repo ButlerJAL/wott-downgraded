@@ -4,34 +4,31 @@
     <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
     <div class="form-inputs forms">
-      <%= f.input :title,
-                  input_html: {data: { generate_enigma_target: "title" }}%>
-      <%= f.input :category,
+      <div class="card d-flex mb-4 mt-1">
+        <h3 class="text-center pt-2">Parameters</h3>
+        <div class="row pe-3 ps-3">
+          <div class="col-md-4 text-center">
+        <%= f.input :category,
                   input_html: {data: { generate_enigma_target: "category" }},
                   as: :select,
                   collection: ['Classic', 'Egypt', 'Roman Empire', 'Mystery / Story', 'Classic / Cultural ', 'Practical / Everyday'] %>
-      <%= f.input :temper,
+          </div>
+          <div class="col-md-4 text-center">
+       <%= f.input :temper,
                   label: "Wizard's temper",
                   as: :select,
                   collection: ['Cocky', 'Passive aggressive', 'Angry', 'Sad', 'Melancholy', 'Insulting'] %>
-      <%= f.input :difficulty,
+            </div>
+          <div class="col-md-4 text-center">
+            <%= f.input :difficulty,
                   input_html: {data: { generate_enigma_target: "difficulty" }},
                   as: :select,
                   collection: ['Beginner', 'Intermediate', 'Expert',] %>
-      <%= f.input :description,
-                  input_html: {data: { generate_enigma_target: "description" }}  %>
-    </div>
+          </div>
+        </div>
 
-    <div class="form-actions">
-      <%= f.button :submit, "Submit", class: "btn btn-outline-gray" %>
-    </div>
-  <% end %>
-
-  <br>
-
-  <%# Generate with AI button%>
-
-  <button type = "button"
+        <div class="text-center mt-3 pb-3">
+         <button type = "button"
           data-action="click->generate-enigma#generate"
           data-generate-enigma-target="generate"
           class="btn btn btn-outline-gray "
@@ -39,7 +36,23 @@
           data-url="<%= create_with_ai_challenges_path %>">
           Generate with AI
           </button>
-  <span data-generate-enigma-target="loading" class="d-none ms-2">
-    <span class="spinner-border spinner-border-sm"></span> Generating...
-  </span>
+
+          <span data-generate-enigma-target="loading" class="d-none ms-2">
+            <span class="spinner-border spinner-border-sm"></span> Generating...
+          </span>
+          </div>
+
+      </div>
+      <%= f.input :title,
+                  input_html: {data: { generate_enigma_target: "title" }}%>
+
+      <%= f.input :description,
+                  input_html: {data: { generate_enigma_target: "description" }}  %>
+
+    <div class="form-actions">
+      <%= f.button :submit, "Submit", class: "btn btn-outline-gray" %>
+      </div>
+    </div>
+  <% end %>
+
 </div>
