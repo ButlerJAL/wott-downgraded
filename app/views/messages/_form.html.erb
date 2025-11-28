@@ -10,7 +10,11 @@
     </div>
   <% end %>
   <div>
-    <%= form.text_field :content, style: "width: 100%; max-width: 600px;", placeholder: "Ask AI for help...", autofocus: true %>
+    <%= form.text_field :content,
+    class: "form-control",
+    style: "width: 100%; max-width: 600px; border: 2px solid #ea00ff; background-color: transparent;",
+    placeholder: "Ask AI for help...",
+    autofocus: true %>
   </div>
   <div class="d-flex align-items-center gap-2 mt-3">
     <%= form.submit "Send message", class: "btn btn-primary" %>

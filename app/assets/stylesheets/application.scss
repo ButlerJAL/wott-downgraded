@@ -10,3 +10,53 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+
+    $primary-color: #200152;
+    $secondary-color: #160025;
+// #001eff
+// #ea00ff
+
+$background-color: #160025;
+body {
+  background-image: linear-gradient($primary-color, $secondary-color);
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+}
+.card {
+  border-width: 2px;
+  border-color: rgba($color: #ea00ff, $alpha: 0.7);
+  background-color: rgba($color: #160025, $alpha: 0.0);
+  color: rgba($color: #01ddff, $alpha: 1.0);
+  box-shadow: 0px 0px 16px #ea00ff;
+}
+
+#main-title {
+  color: rgba($color: #ea00ff, $alpha: 1.0);
+}
+
+#navbar-my-enigma {
+  color: #ea00ff !important;
+  text-decoration: none;
+
+  &:hover {
+    color: #01ddff !important;
+  }
+}
+
+#navbar-signout {
+  color: #ff6f00 !important;
+  text-decoration: none;
+
+  &:hover {
+    color: #ff0101 !important;
+  }
+}
+
+#wizard-speaking {
+  color: rgba($color: #01ddff, $alpha: 1.0);
+}
+
+#new_message input::placeholder {
+  color: #fdd50d; // Yellow to match your border
+  opacity: 1;
+}

@@ -5,6 +5,9 @@ class ChallengesController < ApplicationController
   # GET /challenges or /challenges.json
   def index
     @challenges = current_user.challenges
+    if @challenges.count == 0
+      redirect_to new_challenge_path
+    end
   end
 
   # GET /challenges/1
@@ -21,10 +24,38 @@ class ChallengesController < ApplicationController
   def edit
   end
 
+  def create_with_ai
+    system_prompt = "
+      You are a the game master for our Enigma game.
+      Your task is to create an Enigma for a user to guess.
+      Each Enigma must include a title and the description should include the content of the Enigma with a category of #{params[:category]} and difficulty of #{params[:difficulty]}.
+      The title should not contain the answer.
+      If specific instructions are provided, follow them precisely while crafting the Enigma.
+      Ensure the Enigma is clear and appropriately framed.
+      Avoid introducing unnecessary information or deviating from the task.
+      "
+
+    llm = RubyLLM.chat.with_temperature(1).with_instructions(system_prompt).with_schema(ChallengeSchema)
+    response = llm.ask("Generate an enigma challenge")
+
+    # Debug: Check what type response.content is
+    # Rails.logger.info "Response class: #{response.content.class}"
+    # Rails.logger.info "Response content: #{response.content.inspect}"
+
+    respond_to do |format|
+      format.json do
+        render json: {
+          title: response.content["title"],
+          description: response.content["description"]
+        }
+        end
+      end
+  end
+
+
   # POST /challenges
   def create
     @challenge = current_user.challenges.build(challenge_params)
-
     respond_to do |format|
       if @challenge.save
         format.html { redirect_to challenges_path, notice: 'Enigma was successfully created.' }
