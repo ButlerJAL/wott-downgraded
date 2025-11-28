@@ -5,6 +5,9 @@ class ChallengesController < ApplicationController
   # GET /challenges or /challenges.json
   def index
     @challenges = current_user.challenges
+    return unless @challenges.count.zero?
+
+    redirect_to new_challenge_path
   end
 
   # GET /challenges/1
@@ -51,6 +54,33 @@ class ChallengesController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to challenges_path, notice: 'Enigma was successfully destroyed.', status: :see_other }
+    end
+  end
+
+  def create_with_ai
+    system_prompt = "
+      You are a master of Trivia and Enigma.
+      Your task is to create an Enigma.
+      Each Enigma must include a title and the content of the Enigma.
+      If specific instructions are provided, follow them precisely while crafting the Enigma.
+      Ensure the Enigma is clear and appropriately framed.
+      Avoid introducing unnecessary information or deviating from the task.
+      "
+
+    llm = RubyLLM.chat.with_temperature(1).with_instructions(system_prompt).with_schema(ChallengeSchema)
+    response = llm.ask('Generate an enigma challenge')
+
+    # Debug: Check what type response.content is
+    # Rails.logger.info "Response class: #{response.content.class}"
+    # Rails.logger.info "Response content: #{response.content.inspect}"
+
+    respond_to do |format|
+      format.json do
+        render json: {
+          title: response.content['title'],
+          description: response.content['description']
+        }
+      end
     end
   end
 
